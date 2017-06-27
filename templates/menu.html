@@ -1,0 +1,118 @@
+<html>
+<head>
+    <link href="https://fonts.googleapis.com/css?family=Nunito|Patrick+Hand+SC|Roboto+Slab|Yanone+Kaffeesatz" rel="stylesheet">
+    <style type="text/css">
+	h1{
+		font-family: 'Yanone Kaffeesatz', sans-serif;
+		font-size: 500%;
+		margin-top:20px;
+		text-align : center;
+		text-decoration: underline;
+		color: #472F1D;
+		margin-bottom: 5px
+	}
+	.sub_title{
+		font-family: 'Roboto Slab', serif;
+		font-weight: bold;
+		font-size = 100%
+		color:#472F1D;
+	}
+	.sub_title_header{
+		font-family: 'Roboto Slab', serif;
+		font-weight: bold;
+        font-size = 130%;
+        background:#3e2723;
+        padding:5px;
+        color:#ffffff;
+	}
+	.min_title{
+		font-family: 'Roboto Slab', serif;
+		font-size: 80%;
+		font-color: #6d4c41;
+		font-weight: bolder;
+	}
+	body{
+		padding-left:10px;
+		padding-right: 10px;
+
+	}
+	li{
+		text-align: center;;
+		color:white;
+		background: #6d4c41   ;
+		border: solid;
+		border-color: #3e2723;
+		border-radius: 20px;
+		margin: 4px;
+		padding: 10px;
+		}
+	body{
+		background:#a1887f;
+		}
+	ul{
+		background:#6d4c41 ;
+		border: solid;
+		border-radius: 10px;
+		padding: 10px;
+	}
+	.link_type{
+		color:#ffffff ;
+		font-size: 25px;
+		padding: 5px;
+		background : #212121;
+		font-family: 'Roboto Slab', serif;
+	}
+	.link_type_small{
+		color:#ffffff ;
+		font-size: 15px;
+		padding: 5px;
+		background : #212121;
+		font-family: 'Roboto Slab', serif;
+	}
+
+	.menuItems{
+		color:#000000;
+		font-size: 20px;
+		}
+    .price{
+        font-family: 'Roboto Slab', serif;
+		font-size: 25px;
+		font-color: #6d4c41;
+		font-weight: bolder;
+		float:right;
+		}
+
+</style>
+</head>
+    <body>
+    <div class="pane">
+    <h1>{{restaurant.name}}</h1>
+        </div>
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+        <h3>Flash Messages</h3>
+        <ol>
+            {% for message in messages %}
+            <li><strong>{{message}}</strong></li>
+            {% endfor %}
+        </ol>
+        {% endif %}
+        {% endwith %}
+    <a class="link_type" href="{{url_for('addMenuItem',restaurant_id = restaurant.id)}}"><strong>Create New Item</strong></a>
+        </br>
+        </br>
+        <h2 class="sub_title_header">Menu Items</h2>
+
+        {% for item in items %}
+    <div class="menuItems">
+        <p class="price">{{ item.price }}</p>
+    <p class="sub_title">{{ item.name }}</p>
+        <p class="min_title">{{ item.description }}</p>
+        <a class="link_type_small" href="{{url_for('editMenuItem',restaurant_id = restaurant.id,menu_id = item.id)}}">Edit</a>
+        <a class="link_type_small" href="{{url_for('deleteMenuItem',restaurant_id = restaurant.id,menu_id = item.id)}}">Delete</a>
+        </br>
+        {% endfor %}
+        </div>
+
+    </body>
+</html>
