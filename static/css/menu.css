@@ -1,0 +1,46 @@
+.main_title {
+    font-family: 'Yanone Kaffeesatz', sans-serif;
+    color: #472F1D;
+    font-size: 40px;
+}
+.main_title_sub {
+    font-family: 'Roboto Slab', serif;
+    font-weight: bolder;
+    font-size 35px;
+     color: #472F1D;
+     margin: 10px;
+}
+.small_title {
+    font-family: 'Roboto Slab', serif;
+    font-size: 30px;
+    font-color: #6d4c41;
+    font-weight: bold;
+    
+}
+.link_type {
+    color: #ffffff;
+    font-size: 20px;
+    background: #212121;
+    padding: 8px;
+    font-family: 'Roboto Slab', serif;
+}
+.menuItems {
+    color: #000000;
+    font-size: 20px;
+}
+.price {
+    font-family: 'Roboto Slab', serif;
+    font-size: 25px;
+    font-color: #6d4c41;
+    font-weight: bolder;
+    float: right;
+}
+.border{
+    border: solid;
+    border-width: 5px;
+    border-color: #ff5252;
+}
+body{
+background : #f4fd56;
+}
+

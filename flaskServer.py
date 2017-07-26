@@ -1,13 +1,19 @@
 from flask import *
 from sqlalchemy.orm import sessionmaker
-from database_setup import Base,Restaurant,MenuItem
+from database_setup import Base,Restaurant,MenuItem,House,Character
 from sqlalchemy import *
+from firebase import firebase
+import requests
+
+base_url = "https://game-of-thrones-1e480.firebaseio.com/"
+
+firebase = firebase.FirebaseApplication(base_url, None)
 
 #Initialize Flask with name of the python application
 app = Flask(__name__)
 
 #SQLAlchemy Initialization
-engine = create_engine('sqlite:///restaurantmenu.db')
+engine = create_engine('sqlite:///gameofthrones.db')
 Base.metadata.bind = engine
 DBSession = sessionmaker(bind = engine)
 session = DBSession()
@@ -93,6 +99,36 @@ def restaurantMenuItemJSON(restaurant_id,menu_id):
 
     return jsonify(MenuItem = item.serialize)
 
+@app.route('/')
+def gameOfThronesHome():
+
+    return render_template('homepage.html')
+
+@app.route('/houses')
+def allHouses():
+
+    houses = session.query(House).all()
+
+    return render_template('houses.html',houses=houses)
+
+@app.route('/characters')
+def allCharacters():
+
+    characters = session.query(Character).all()
+    return render_template('characters.html',characters=characters)
+
+@app.route('/characters/<int:character_id>')
+def characterDetails(character_id):
+
+    character = session.query(Character).filter_by(id=character_id).one()
+    url = 'http://awoiaf.westeros.org/api.php?&action=query&format=json&prop=extracts&titles=' + character.name
+
+    response = requests.get(url)
+    print response.json()
+
+    body = response.json()['query']['pages']
+    extract = body[body.keys()[0]]['extract']
+    return render_template('characterDetail.html',character = character,data=extract)
 
 #Server is run only if ran directly
 #Not executed if imported

@@ -30,6 +30,7 @@ Vagrant.configure("2") do |config|
     pip2 install --upgrade pip
     pip2 install flask packaging oauth2client redis passlib flask-httpauth
     pip2 install sqlalchemy flask-sqlalchemy psycopg2 bleach
+    pip2 install numpy pandas matplotlib
 
     su postgres -c 'createuser -dRS vagrant'
     su vagrant -c 'createdb'

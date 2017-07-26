@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Characters</title>
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="static/css/materialize.min.css" media="screen,projection"/>
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body class="blue-grey darken-3">
+<!--Import jQuery before materialize.js-->
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="static/js/materialize.min.js"></script>
+
+<div class="navbar-fixed deep-orange darken-3">
+    <nav>
+        <div class="nav-wrapper">
+            <a href="#" class="brand-logo">Game Of Thrones</a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li><a href="{{url_for('allHouses')}}">Houses</a></li>
+                <li class="active"><a href="{{url_for('allCharacters')}}">Characters</a></li>
+            </ul>
+        </div>
+    </nav>
+</div>
+<ul>
+    <div class="row">
+
+        {% for character in characters %}
+        {% if character.imageUrl != "https://msudenver.edu/media/sampleassets/profile-placeholder.png" %}
+        <li>
+            <div class="col s2">
+                <div class="card small">
+                    <div class="card-image">
+                        <img src="{{character.imageUrl}}" height="100%">
+                        <span class="card-title">{{character.name}}</span>
+                    </div>
+                    <div class="card-content">
+                        <p><strong>Played By </strong> {{character.playedBy}}</p>
+
+                    </div>
+                    <div class="card-action">
+                        <a href="{{url_for('characterDetails',character_id=character.id)}}">Information</a>
+                    </div>
+                </div>
+            </div>
+        </li>
+        {% endif %}
+        {% endfor %}
+    </div>
+
+</ul>
+
+
+</body>
+</html>
